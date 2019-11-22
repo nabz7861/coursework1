@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My first Vue app</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+    
+<form id="demo">
+  <!-- text -->
+
+  <!-- radio buttons -->
+ 
+  <!-- select -->
+  
+  <!-- multiple select -->
+  <p>
+      
+      
+    <select v-model="multiSelect" multiple>
+      <option>one</option>
+      <option>two</option>
+      <option>three</option>
+              <option>four</option>
+              <option>five</option>
+    </select>
+    {{multiSelect}}
+  </p>
+
+</form>
+<script>
+new Vue({
+  el: '#demo',
+  data: {
+
+    multiSelect: [ '']
+  }
+})
+    
+var ind = this.multiSelect;
+    type = [{'review': ind}];
+
+    
+localStorage.setItem('review', JSON.stringify(type));
+    
+</script>
+
+</body>
+</html>
