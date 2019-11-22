@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My first Vue app</title>
+  <script src="https://unpkg.com/vue"></script>
+        <link rel="stylesheet" type="text/css" href="cc1css.css">
+</head>
+<body>
+    
+        
+<div id="navigation">
+<toplinks v-bind:page=page></toplinks>
+</div>
+
+      
+  <center> <form id="signup">
+<h2>add to courses </h2>
+<label for="email"> <h3>topic</h3> </label>
+<input required type="text" id="email" v-model='email' >
+<br><br>
+<label for="Name"><h3>location</h3> </label>
+<input required type="name" id="name" v-model='name'>
+<br><br>
+<label for="password"><h3>price</h3> </label>
+<input required type="text" id="password" v-model='password'>
+<br><br>
+<button class="button button1" v-on:click='onSubmit'>Submit</button>
+      <br>
+      </form> </center>
+    <br>
+<script>
+var signupApp = new Vue({
+el: '#signup',
+data: {
+email: '',
+name: '',
+password: '',
+},
+methods: {
+onSubmit: function() {
+    
+
+// 
+var users = '';
+var inputemail = this.email;
+
+    
+if (localStorage.getItem('course')) { // 'users' is an array of objects
+users = JSON.parse(localStorage.getItem('course'));
+   
+     
+};
+    //i check if any users, and if users already exist, Alert
+if (users) {
+if (users.some(function(user) {return user.email === inputemail})) {
+alert('Email already exists!' );
+    
+return;
+}
+    //push to server
+users.push({'topic': inputemail, 'location': this.name, 'price': this.password});
+localStorage.setItem('course', JSON.stringify(users));
+   
+}
+    
+    
+else {
+users = [{ 'location': this.name, 'topic': inputemail, 'location': this.password}];
+localStorage.setItem('course', JSON.stringify(users));
+} // the function is currently empty
+}
+}})
+
+     Vue.component('toplinks', {
+props: ['page'],
+template: `<div>
+<a href='home.html' v-bind:class="{active: page==='home'}">home</a>
+
+<a href='n2.html' v-bind:class="{active: page==='userpage'}">Userpage</a>
+
+<a href='html1.html' v-bind:class="{active: page==='userpage'}">alphabetically</a>
+<a href='sdsdfsd.html' v-bind:class="{active: page==='userpage'}">add to database</a>
+
+<a href='hendon.html' v-bind:class="{active: page==='userpage'}">courses</a>
+
+<a href='exper.html' v-bind:class="{active: page==='course'}">filter</a>
+</div>`
+})
+    
+ var vue3 = new Vue({
+el: '#navigation',
+data: {'page': 'home'}
+})
+
+</script>
+
+</body>
+</html>
