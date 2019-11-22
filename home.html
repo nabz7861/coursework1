@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My first Vue app</title>
+  <script src="https://unpkg.com/vue"></script>
+    <link rel="stylesheet" type="text/css" href="cc1css.css">
+</head>
+<body>
+   <div id="navigation">
+<toplinks v-bind:page=page></toplinks>
+</div>
+    
+    <div id="appa">
+    <div id="myId" ref="myId" v-if="seen"> {{ message }}</div>
+    
+</div>
+  
+ 
+    <div id="app">
+  <h1>{{ message }}</h1>
+</div>
+
+<script>
+    
+   
+    var stor = JSON.parse(localStorage.getItem("course"));
+    
+     object = JSON.parse(localStorage.getItem("serviceprovider"));
+  
+    //var ss = (object);
+//var check = 'typeofuser: "service_provider"'
+
+ 
+        if (object){
+            console.log((object[0] ))
+    
+         new Vue({
+    el: '#appa',
+    data: { 
+          message:  stor,
+         seen: true
+      },
+
+    });
+
+      }
+   
+    
+      if (!object)  {
+    new Vue({
+    el: '#appa',
+    data: { 
+          message:  '',
+         seen: false
+      },
+
+    });
+
+      }
+var myObject = new Vue({
+  el: '#app',
+  data: {message: 'Hello Vue!'}
+})
+
+ 
+Vue.component('toplinks', {
+props: ['page'],
+template: `<div>
+<a href='home.html' v-bind:class="{active: page==='home'}">home</a>
+
+<a href='n2.html' v-bind:class="{active: page==='userpage'}">Userpage</a>
+<a href='sdsdfsd.html' v-bind:class="{active: page==='userpage'}">add to database</a>
+
+<a href='hendon.html' v-bind:class="{active: page==='userpage'}">courses</a>
+
+<a href='exper.html' v-bind:class="{active: page==='course'}">filter</a>
+</div>`
+})
+    
+ var vue3 = new Vue({
+el: '#navigation',
+data: {'page': 'home'}
+})
+</script>
+
+</body>
+</html>
