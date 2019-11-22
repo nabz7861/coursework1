@@ -1,0 +1,360 @@
+    <!DOCTYPE html>
+<html>
+<head>
+        <script src="https://unpkg.com/vue">   </script>
+   <link rel="stylesheet" type="text/css" href="cc1css.css">
+    <link href="https://fonts.googleapis.com/css?family=Sacramento&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    
+    <center> <div id="navigation">
+<toplinks v-bind:page=page></toplinks>
+</div></center>
+    
+ <div id="app">
+    <div id="myId" ref="myId" v-if="seen">Your email addres is {{ message }}</div>
+    
+</div>
+    
+   
+   
+    
+<div id="app2"><myheader v-bind:signedin=signedin></myheader></div>
+
+ <h1>Sign in </h1> 
+   <center>  <form id="signup">
+    <h2>Student/Parents</h2>
+  <label for="Email"><h3>Email</h3> </label>
+<input required type="email" id="email" v-model='email'>
+<br><br>
+<label for="password"><h3>Password:</h3> </label>
+<input required type="password" id="password" v-model='password'>
+<br><br>
+<button class="button button1" v-on:click='onSubmit'>Submit</button>  
+    
+       </form> </center>
+    
+
+<br>
+  <br>
+   <center><form  id="signupstudent"  class="fo">
+       
+<h2>Service Providers</h2>
+<label for="email"> <h3>Email:</h3> </label>
+<input required type="email" id="emailprovider" v-model='emailprovider'>
+<br><br>
+
+<label for="password"> <h3>Password:</h3> </label>
+<input required type="password" id="passwordprovider" v-model='passwordprovider'>
+<br><br>
+<button class="button button1" v-on:click='onSubmit'>Submit</button>
+       
+       <br>
+</form> </center>
+<!--
+    
+    <div id="app">	
+     <button @click="destroy()">Remove Local Storage Data</button>
+
+
+</div>
+-->
+<!--
+    <button id="delete"  class="button button1" v-on:click='onSubmit'>logout</button>
+    
+-->
+<!--     localStorage.removeItem('id_token')-->
+    
+        
+ <script>
+      
+   
+   
+           
+    
+  Vue.component('myheader', {
+props: ['signedin'],
+template: `<div>
+<a href='cc1.html' v-if='!signedin'>sign up</a>
+<a href='n2.html' v-if='!signedin'>sign in</a>
+<a href='signout.html' v-if='signedin'>sign out</a>
+</div>`,
+})  
+     
+     
+     
+     Vue.component('toplinks', {
+props: ['page'],
+template: `<div>
+<a href='home.html' v-bind:class="{active: page==='home'}">home</a>
+
+<a href='n2.html' v-bind:class="{active: page==='userpage'}">Userpage</a>
+
+<a href='html1.html' v-bind:class="{active: page==='userpage'}">alphabetically</a>
+
+
+<a href='sdsdfsd.html' v-bind:class="{active: page==='userpage'}">add to database</a>
+
+<a href='hendon.html' v-bind:class="{active: page==='userpage'}">courses</a>
+
+<a href='exper.html' v-bind:class="{active: page==='course'}">filter</a>
+</div>`
+})
+    
+ var vue3 = new Vue({
+el: '#navigation',
+data: {'page': 'home'}
+})
+ 
+     validuser = JSON.parse(localStorage.getItem('loggeduser'));
+  
+        if (validuser)  {
+     var vue1 = new Vue({
+el: '#app2',
+data: {
+'signedin': true
+}
+})
+
+           
+  } 
+      if (!validuser)  {
+   var vue2 = new Vue({
+el: '#app2',
+data: {
+'signedin': false
+}
+})}
+   
+
+ var signupApp = new Vue({
+el: '#signup',
+data: {
+email: '',
+password: '',
+},
+methods: {
+onSubmit: function() {
+
+var users = '';
+var inputemail = this.email;
+var inputpass = this.password;
+   
+if (localStorage.getItem('users')) { // 'users' is an array of objects
+users = JSON.parse(localStorage.getItem('users'));
+     
+};
+    //i check if any users, and if users already exist, Alert
+    
+  if (!users) {
+      alert('please enter your email and password' );
+  } 
+if (users) {
+if (users.some(function(user) {return user.email === inputemail && user.password === inputpass})) {
+alert('Login sucessful' );
+
+          {
+type = [{'typeofuser': 'studentparents'}];
+
+localStorage.setItem('usertype', JSON.stringify(type));            
+              
+
+         }
+     {
+users = [{'email': inputemail}];
+
+         
+localStorage.setItem('loggeduser', JSON.stringify(users));
+}
+    
+    
+return;
+}
+else {
+   alert('Please recheck your email and password' ); 
+}
+}
+    
+    
+}
+}})
+
+ var signinp = new Vue({
+el: '#signupstudent',
+data: {
+emailprovider: '',
+nameprovider: '',
+passwordprovider: '',
+   
+},
+methods: {
+onSubmit: function() {
+    
+
+// 
+var userssp = '';
+var inputemail = this.emailprovider;
+var localpass = this.passwordprovider;
+
+    
+if (localStorage.getItem('userssp')) { // 'users' is an array of objects
+userssp = JSON.parse(localStorage.getItem('userssp'));
+    
+};
+    //i check if any users, and if users already exist, Alert
+  if (!userssp) {
+      alert('please enter your email and password' );
+  } 
+if (userssp) {
+    
+
+     {
+if (userssp.some(function(usern) {return usern.email === inputemail && usern.password === localpass})) {
+alert('login successfull' );
+    
+         {
+type = [{'typeofuser': 'service_provider'}];
+
+localStorage.setItem('usertype', JSON.stringify(type));    
+             
+
+         }
+    type = [{'service': 'service_provider'}];
+
+localStorage.setItem('serviceprovider', JSON.stringify(type)); 
+
+    
+    {
+        {
+            
+         courses1 = [
+{ 'topic': 'math', 'location': 'hendon', 'price': 100 },
+{ 'topic': 'math', 'location': 'colindale', 'price': 80 },
+{ 'topic': 'math', 'location': 'brent cross', 'price': 90 },
+{ 'topic': 'math', 'location': 'golders green', 'price': 120 },
+{ 'topic': 'english', 'location': 'hendon', 'price': 110 },
+{ 'topic': 'english', 'location': 'colindale', 'price': 90 },
+{ 'topic': 'english', 'location': 'brent cross', 'price': 90 },
+{ 'topic': 'english', 'location': 'golders green', 'price': 130 },
+{ 'topic': 'piano', 'location': 'hendon', 'price': 120 },
+{ 'topic': 'piano', 'location': 'golders green', 'price': 140 }
+]  
+    localStorage.setItem("course", JSON.stringify(courses1));     
+            
+            
+            
+        }
+users = [{'email': inputemail}];
+
+         
+localStorage.setItem('loggeduser', JSON.stringify(users));
+}
+    
+return;
+}
+ else {
+   alert('Please recheck your email and password' ); 
+}   //push to server
+
+}
+    
+ 
+}
+}}})
+  
+//new Vue({
+//el: '#app',
+//  
+//  data: { 
+//
+//  },
+//  
+//   methods:{
+//
+//destroy: function() {
+//  const loggeduser = JSON.parse(localStorage.getItem('loggeduser'));
+//  if(loggeduser){
+//    localStorage.removeItem(loggeduser);
+//  
+//}}}});
+
+     
+     
+     
+     
+     //
+     
+     
+     
+// 
+//var inputemail = this.email;
+//
+//    
+//if (localStorage.getItem('users')) { // 'users' is an array of objects
+//users = JSON.parse(localStorage.getItem('users'));
+//    
+//     
+//};
+//    
+//    //i check if any users, and if users already exist, Alert
+//if (users) {
+//if (users.some(function(user) {return user.email === inputemail})) {
+//alert('Email already exists!' );
+//    
+//return;
+//}
+//    //push to server
+//users.push({'name': this.name,'email': inputemail, 'password': this.password});
+//localStorage.setItem('users', JSON.stringify(users));
+//   
+//}
+//     
+   validuser = JSON.parse(localStorage.getItem('loggeduser'));
+     us = email
+  
+//     if (validuser)  {
+//console.log(object1)
+//           
+//  }
+
+//   object1 = JSON.parse(localStorage.getItem("loggeduser"))[0];
+//    
+    
+     object = JSON.parse(localStorage.getItem("loggeduser"));
+    
+    if (object){
+       var qwe = (object)[0];
+        
+    
+         new Vue({
+    el: '#app',
+    data: { 
+          message:  qwe,
+         seen: true
+      },
+
+    });
+
+      }
+
+    
+      if (!object)  {
+    new Vue({
+    el: '#app',
+    data: { 
+          message:  '',
+         seen: false
+      },
+
+    });
+
+      } 
+   
+</script>
+
+</body>
+</html>
+    
+    
