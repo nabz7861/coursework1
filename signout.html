@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+       <link rel="stylesheet" type="text/css" href="cc1css.css">
+    <link >
+  <title>My first Vue app</title>
+  <script src="https://unpkg.com/vue"></script>
+</head>
+<body>
+<div id="navigation">
+<toplinks v-bind:page=page></toplinks>
+</div>
+
+    <div id="app">
+  <h1>{{ message }}</h1>
+</div>
+
+<script>
+     
+   
+Vue.component('toplinks', {
+props: ['page'],
+template: `<div>
+<a href='home.html' v-bind:class="{active: page==='home'}">home</a>
+
+<a href='n2.html' v-bind:class="{active: page==='userpage'}">Userpage</a>
+<a href='sdsdfsd.html' v-bind:class="{active: page==='userpage'}">add to database</a>
+
+<a href='hendon.html' v-bind:class="{active: page==='userpage'}">courses</a>
+
+<a href='exper.html' v-bind:class="{active: page==='course'}">filter</a>
+</div>`
+})
+    
+ var vue3 = new Vue({
+el: '#navigation',
+data: {'page': 'home'}
+})
+ 
+    
+       
+
+
+var myObject = new Vue({
+  el: '#app',
+  data: {message: 'You have been signed out'}
+})
+
+//localStorage.removeItem(loggeduser);
+localStorage.removeItem('courses');
+localStorage.removeItem('course');
+localStorage.removeItem('userssp');
+     localStorage.removeItem('users');
+           
+   localStorage.removeItem('usertype');
+    localStorage.removeItem('loggeduser');
+
+  
+</script>
+  
+
+    </body>
+</html>
